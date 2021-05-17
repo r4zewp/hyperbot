@@ -1,10 +1,15 @@
+import hidden
+import asyncio
+import ssl
+import sys
+from aiohttp import web
 import logging
 import aiogram
 from aiogram import Dispatcher, executor, Bot, types
 
-API_TOKEN = "1814093366:AAH5nFkH_g3PaYoXEShaxlZP9SYtyVLlHxQ"
+API_TOKEN = hidden
 logging = logging.basicConfig(level=logging.INFO)
-bot = Bot(token="1814093366:AAH5nFkH_g3PaYoXEShaxlZP9SYtyVLlHxQ")
+bot = Bot(token=hidden)
 dis = Dispatcher(bot)
 
 @dis.message_handler(commands=["start"])
