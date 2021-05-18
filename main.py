@@ -1,7 +1,9 @@
+import requests
 import hidden
 import asyncio
 import ssl
 import sys
+import aiohttp
 from aiohttp import web
 import logging
 import aiogram
@@ -12,13 +14,13 @@ logging = logging.basicConfig(level=logging.INFO)
 bot = Bot(token=hidden)
 dis = Dispatcher(bot)
 
-@dis.message_handler(commands=["start"])
-async def send_welcome(message: types.Message):
-    await  message.reply("Hello! \n I can speak now") 
+@dis.message_handler(commands=["get"])
+async def get_account_info(qiwi, message: types.Message):
+    res = aiohttp.ClientSession()
+    res.headers['Accept'] = "application/json"
+    res.headers['authorization'] = 'Bearer ' + qiwi
+    obj = res.get('https://edge.qiwi.com/person-profile/v1/profile/current?authInfoEnabled=true&contractInfoEnabled=true&userInfoEnabled=true')
+    await message.reply(res.json())
 
-@dis.message_handler()
-async def reply_messages(message: types.Message):
-    await message.reply(message.text)
-
-if __name__ == '__main__':
-    executor.start_polling(dis, skip_updates=True)
+if __name__ == "__main__":
+    executor.start_polling(skip_updates=True)
