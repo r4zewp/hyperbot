@@ -2,8 +2,13 @@ import hidden
 from aiohttp import web
 import sqlite3
 import logging
+import psycopg2 
 import aiogram
+import os
 from aiogram import Dispatcher, executor, Bot, types
+
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 API_TOKEN = hidden
 logging = logging.basicConfig(level=logging.INFO)
