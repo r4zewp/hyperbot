@@ -11,16 +11,12 @@ from aiogram import Dispatcher, executor, Bot, types
 
 API_TOKEN = hidden
 logging = logging.basicConfig(level=logging.INFO)
-bot = Bot(token=hidden)
+bot = Bot(token="1814093366:AAH5nFkH_g3PaYoXEShaxlZP9SYtyVLlHxQ")
 dis = Dispatcher(bot)
 
 @dis.message_handler(commands=["get"])
-async def get_account_info(qiwi, message: types.Message):
-    res = aiohttp.ClientSession()
-    res.headers['Accept'] = "application/json"
-    res.headers['authorization'] = 'Bearer ' + qiwi
-    obj = res.get('https://edge.qiwi.com/person-profile/v1/profile/current?authInfoEnabled=true&contractInfoEnabled=true&userInfoEnabled=true')
-    await message.reply(res.json())
+async def get_account_info(message: types.Message):
+    await message.reply(message.text)
 
 if __name__ == "__main__":
-    executor.start_polling(skip_updates=True)
+    executor.start_polling(dis, skip_updates=True)
