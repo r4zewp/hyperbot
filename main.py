@@ -1,10 +1,6 @@
-import requests
 import hidden
-import asyncio
-import ssl
-import sys
-import aiohttp
 from aiohttp import web
+import sqlite3
 import logging
 import aiogram
 from aiogram import Dispatcher, executor, Bot, types
